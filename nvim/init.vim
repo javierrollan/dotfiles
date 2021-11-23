@@ -29,6 +29,8 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'akinsho/bufferline.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'preservim/nerdtree'
@@ -36,13 +38,16 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf.vim'
 Plug 'vim-syntastic/syntastic'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-sandwich'
 Plug 'airblade/vim-gitgutter'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'arcticicestudio/nord-vim'
 call plug#end()
+
+" Settings BufferLine
+lua require("bufferline").setup{}
 
 " Settings Colorizer
 lua require 'colorizer'.setup()
@@ -103,9 +108,14 @@ set switchbuf=usetab
 nnoremap <F8> :sbnext <CR>
 nnoremap <F7> :sbprevious <CR>
 nnoremap <C-o> :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
+" Keybindings BufferLine
+nnoremap <C-n> :BufferLineCycleNext<CR>
+nnoremap <C-b> :BufferLineCyclePrev<CR>
+nnoremap <C-x> :BufferLinePick<CR>
+nnoremap <C-c> :BufferLinePickClose<CR>
 
 " Colorscheme
 colorscheme nord
