@@ -1,0 +1,86 @@
+configuration {
+	show-icons: true;
+	font: "MesloLGM NF medium 12";
+	display-run: " ";
+	display-drun: " ";
+	display-window: "穀";
+	modi: "window,run,drun";
+	timeout {
+		action: "kb-cancel";
+		delay:  0;
+	}
+	filebrowser {
+		directories-first: true;
+		sorting-method:    "name";
+	}
+}
+
+* {
+	background-color: #2e3440;
+	bg-alt: #3B4252;
+	fg: #ECEFF4;
+	nord-blue-light: #88c0d0;
+	nord-yellow: #a8d7fe;
+	nord3: #4c566a;
+	border: 0;
+	border-color: @nord3;
+	lines: 12;
+	padding: 0;
+	margin: 0;
+	spacing: 0;
+}
+
+window {
+	border: 0px 0px 0px 0px;
+	border-radius: 6px;
+	border-color: @nord3;
+	transparency: "real";
+	background-color: @bg-alt;
+}
+
+mainbox {
+	children: [inputbar, listview];
+	border: 0px 0px 0px 0px;
+	border-color: @nord3;
+	background-color: @bg-alt;
+}
+
+listview {
+	background-color: @bg-alt;
+	columns: 1;
+}
+
+element {
+	padding: 12;
+	background-color: @bg-alt;
+	text-color: @nord3;
+}
+
+element icon {
+	size: 24px;
+}
+
+element selected {
+	background-color: @bg-alt;
+	text-color: @nord-blue-light;
+}
+
+inputbar {
+	border: 0px 0px 0px 0px;
+	padding: 0 0 0 0;
+	background-color: @bg-alt;
+	children: [prompt, entry];
+}
+
+prompt {
+	enabled: true;
+	font: "MesloLGM NF medium 12";
+	padding: 12 0 0 12;
+	text-color: @nord-yellow;
+	background-color: @bg-alt;
+}
+
+entry {
+	padding: 12 0 0 12;
+	text-color: @nord-yellow;
+}
