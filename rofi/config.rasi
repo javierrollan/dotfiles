@@ -16,7 +16,10 @@ configuration {
 }
 
 * {
-	background-color: #2e3440;
+	background: #4c566a;
+	normal-background: @background;
+	alternate-normal-background: #a3be8c;
+	foreground: #b48ead;
 	bg-alt: #3B4252;
 	fg: #ECEFF4;
 	nord-blue-light: #88c0d0;
@@ -24,13 +27,14 @@ configuration {
 	nord3: #4c566a;
 	border: 0;
 	border-color: @nord3;
-	lines: 12;
-	padding: 0;
+	lines: 6;
+	padding: 5;
 	margin: 0;
 	spacing: 0;
 }
 
 window {
+	width: 35%;
 	border: 0px 0px 0px 0px;
 	border-radius: 6px;
 	border-color: @nord3;
@@ -46,17 +50,18 @@ mainbox {
 }
 
 listview {
-	background-color: @bg-alt;
+	background-color: #4c566a;
 	columns: 1;
 }
 
 element {
-	padding: 12;
+	padding: 12 0 0 12;
 	background-color: @bg-alt;
 	text-color: @nord3;
 }
 
 element icon {
+	padding: 12 0 0 12;
 	size: 24px;
 }
 
