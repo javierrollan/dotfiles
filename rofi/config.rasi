@@ -18,19 +18,17 @@ configuration {
 * {
 	background: #4c566a;
 	normal-background: @background;
-	alternate-normal-background: #a3be8c;
-	foreground: #b48ead;
+	alternate-normal-background: @background;
+	foreground: #a8d7fe;
 	bg-alt: #3B4252;
 	fg: #ECEFF4;
 	nord-blue-light: #88c0d0;
-	nord-yellow: #a8d7fe;
-	nord3: #4c566a;
 	border: 0;
 	border-color: @nord3;
 	lines: 6;
 	padding: 5;
 	margin: 0;
-	spacing: 0;
+	spacing: 2;
 }
 
 window {
@@ -45,47 +43,30 @@ window {
 mainbox {
 	children: [inputbar, listview];
 	border: 0px 0px 0px 0px;
-	border-color: @nord3;
-	background-color: @bg-alt;
 }
 
 listview {
-	background-color: #4c566a;
 	columns: 1;
+	background-color: @background;
 }
 
 element {
 	padding: 12 0 0 12;
-	background-color: @bg-alt;
-	text-color: @nord3;
-}
-
-element icon {
-	padding: 12 0 0 12;
-	size: 24px;
-}
-
-element selected {
-	background-color: @bg-alt;
-	text-color: @nord-blue-light;
 }
 
 inputbar {
-	border: 0px 0px 0px 0px;
-	padding: 0 0 0 0;
-	background-color: @bg-alt;
 	children: [prompt, entry];
 }
 
 prompt {
 	enabled: true;
 	font: "MesloLGM NF medium 12";
-	padding: 12 0 0 12;
-	text-color: @nord-yellow;
+	padding: 5;
+	text-color: @foreground;
 	background-color: @bg-alt;
 }
 
 entry {
-	padding: 12 0 0 12;
-	text-color: @nord-yellow;
+	padding: 5;
+	text-color: @foreground;
 }
