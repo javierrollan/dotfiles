@@ -2,7 +2,7 @@
 
 usb_print() {
     devices=$(lsblk -Jplno NAME,TYPE,RM,SIZE,MOUNTPOINT,VENDOR)
-    output=""
+    output="No USB Connected"
     counter=0
 
     for unmounted in $(echo "$devices" | jq -r '.blockdevices[] | select(.type == "part") | select(.rm == true) | select(.mountpoint == null) | .name'); do
@@ -16,7 +16,7 @@ usb_print() {
             space="   "
         fi
         counter=$((counter + 1))
-
+		output=""
         output="$output$space $unmounted"
     done
 
@@ -27,7 +27,7 @@ usb_print() {
             space="   "
         fi
         counter=$((counter + 1))
-
+		output=""
         output="$output$space $mounted"
     done
 
