@@ -1,6 +1,7 @@
 [colors]
 background = #2e3440
 background-alt = #444
+background-transparent = #00000000
 foreground = #ebcb8b
 foreground-alt = #eceff4
 primary = #ffb52a
@@ -17,40 +18,37 @@ white = #eceff4
 blue = #88c0d0
 
 [bar/top]
-;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
 height = 27
-;offset-x = 1%
-;offset-y = 1%
-radius = 6.0
-fixed-center = false
+line-size = 2
+;radius = 6.0
+fixed-center = true
+wm-restack = bspwm
+enable-ipc = true
 
-background = ${colors.background}
+;background = ${colors.background}
+background = ${colors.background-transparent}
 foreground = ${colors.foreground}
 
-line-size = 3
-line-color = #f00
+;border-size = 4
+;border-color = #00000000
+;padding-left = 2
+;padding-right = 2
+;module-margin-left = 1
+;module-margin-right = 1
 
-border-size = 4
-border-color = #00000000
-
-padding-left = 2
-padding-right = 2
-
-module-margin-left = 1
-module-margin-right = 1
-
-;font-0 = fixed:pixelsize=10;1
 font-0 = MesloLGM Nerd Font:style=Regular:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+font-1 = MesloLGM Nerd Font:style=Regular:pixelsize=16;3
+font-2 = MesloLGM Nerd Font:style=Regular:pixelsize=14;3
+;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+;font-2 = siji:pixelsize=10;1
 
-modules-left = hostname eth
-modules-center = bspwm
+modules-left = hostname trap-up-right eth trap-down-left
+modules-center = trap-left bspwm trap-right
 modules-right = filesystem memory cpu wlan battery temperature powermenu
 
-tray-position = center
-tray-padding = 2
+;tray-position = center
+;tray-padding = 2
 cursor-click = pointer
 cursor-scroll = ns-resize
 
@@ -68,14 +66,15 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
-border-color = #00000000
+;border-size = 4
+;border-color = #00000000
 padding-left = 2
 padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
 font-0 = MesloLGM Nerd Font:style=Regular:pixelsize=10;1
+;font-1 = MesloLGM Nerd Font:style=Regular:pixelsize=27;1
 ;font-0 = fixed:pixelsize=10;1
 
 modules-right = network-traffic xkeyboard date
@@ -115,24 +114,26 @@ label-unmounted-foreground = ${colors.white}
 [module/bspwm]
 type = internal/bspwm
 
+format = <label-state>
+format-background = ${colors.background}
+
+label-background = ${colors.background}
+
 label-focused = %index%
 label-focused-background = ${colors.shadow}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+label-focused-underline= ${colors.alert}
+label-focused-padding = 1
 
 label-occupied = %index%
-label-occupied-padding = 2
+label-occupied-padding = 1
 
 label-urgent = %index%!
 label-urgent-background = ${colors.inuse}
-label-urgent-padding = 2
+label-urgent-padding = 1
 
 label-empty = %index%
 label-empty-foreground = ${colors.empty}
-label-empty-padding = 2
-
-; Separator in between workspaces
-label-separator = |
+label-empty-padding = 1
 
 [module/cpu]
 type = internal/cpu
@@ -151,7 +152,7 @@ ramp-load-2-foreground = ${colors.urgent}
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = ""
 format-prefix-foreground = ${colors.white}
 format-underline = #4bffdc
 label = %percentage_used%%
@@ -183,9 +184,12 @@ type = internal/network
 interface = enp62s0
 interval = 3.0
 
+format = <label>
+format-background = ${colors.background}
 format-connected-underline = #55aa55
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.white}
+
 label-connected = %local_ip%
 
 format-disconnected =
@@ -193,6 +197,11 @@ format-disconnected =
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
+padding-left = 2
+padding-right = 2
+module-margig-left = 2
+
+label-padding = 2
 
 [module/date]
 type = internal/date
@@ -204,7 +213,7 @@ date-alt = "%Y-%m-%d"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
+format-prefix = ""
 format-prefix-foreground = ${colors.white}
 format-underline = #0a6cf5
 
@@ -300,14 +309,12 @@ ramp-foreground = ${colors.white}
 
 [module/powermenu]
 type = custom/menu
-
 expand-right = true
-
 format-spacing = 1
 
-label-open = 
+label-open = ""
 label-open-foreground = ${colors.secondary}
-label-close =  cancel
+label-close = "cancel"
 label-close-foreground = ${colors.secondary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
@@ -323,7 +330,7 @@ menu-1-1 = reboot
 menu-1-1-exec = sudo reboot
 
 menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
+menu-2-0-exec = shutdown now
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
@@ -331,10 +338,17 @@ menu-2-1-exec = menu-open-0
 type = custom/script
 exec = echo "$(whoami)@$(cat /etc/hostname)"
 format = <label>
-format-prefix = " "
+format-background = ${colors.background}
+format-prefix = "  "
 format-prefix-foreground = ${colors.blue}
 format-underline = #268bd2
 label-foreground = ${colors.white}
+margin-module-left = 1
+margin-module-right = 1
+padding-left = 2
+padding-right = 2
+
+label-padding = 1
 
 [module/system-usb-udev]
 type = custom/script
@@ -361,8 +375,38 @@ exec = ~/.config/polybar/scripts/system-gpu-optimus.sh
 interval = 1200
 click-right = ~/.config/polybar/scripts/system-gpu-optimus.sh --switch
 
-[settings]
-screenchange-reload = true
+; Special
+[module/trap-left]
+type = custom/text
+content = %{T2}%{T-}
+content-foreground = ${colors.background}
+
+[module/trap-right]
+type = custom/text
+content = %{T2}%{T-}
+content-foreground = ${colors.background}
+
+[module/trap-down-right]
+type = custom/text
+content = %{T2}%{T-}
+content-foreground = ${colors.white}
+
+[module/trap-down-left]
+type = custom/text
+content = %{T2}%{T-}
+content-foreground = ${colors.white}
+
+[module/trap-up-right]
+type = custom/text
+content = %{T2}%{T-}
+content-foreground = ${colors.white}
+
+[module/trap-up-left]
+type = custom/text
+content = %{T2}%{T-}
+content-foreground = ${colors.white}
+
+
 
 [global/wm]
 margin-top = 5
