@@ -6,6 +6,11 @@
 super + Return
 	gnome-terminal
 
+# test
+super + t
+	gnome-terminal && gnome-terminal --working-directory=Proyectos -- zsh -c 'neofetch --color_blocks off;zsh' && gnome-terminal -- htop
+	# gnome-terminal --command="bash -c 'pwd; $SHELL'"
+
 # program launcher
 super + d
 	rofi -show run
