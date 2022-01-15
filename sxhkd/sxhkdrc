@@ -6,7 +6,7 @@
 super + Return
 	gnome-terminal
 
-# test
+# Home
 super + t
 	gnome-terminal && gnome-terminal --working-directory=Proyectos -- zsh -c 'neofetch --color_blocks off;zsh' && gnome-terminal -- htop
 	# gnome-terminal --command="bash -c 'pwd; $SHELL'"
@@ -18,6 +18,14 @@ super + d
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+
+# Obsidian Note Apps
+super + o
+	$HOME/AppImages/./Obsidian-0.13.19.AppImage
+
+# firefox
+super + f
+	firefox
 
 #
 # bspwm hotkeys
